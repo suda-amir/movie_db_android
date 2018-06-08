@@ -73,89 +73,6 @@ public class seriesEachActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(objectRequest);
     }
-    public void get_season_details(String url) {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        JsonObjectRequest objectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.e("Rest response", response.toString());
-                        displaySeason(response);
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("Error", "Error");
-                    }
-                }
-        );
-        objectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                10000000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(objectRequest);
-    }
-
-    public void displaySeason(JSONObject y) {
-        String season_num;
-        String episode_num;
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.weight = 1.0f;
-        int numberOfButtonsPerRow = 2;
-        String disp;
-        int k = 0;
-
-
-
-        final LinearLayout verticalLayout= (LinearLayout)findViewById(R.id.linear);
-        try {
-            JSONArray search_results = y.getJSONArray("Episodes");
-            season_num = y.getString("Season");
-            for(int i =0; i <=search_results.length() + 1; i++) {
-                LinearLayout newLine = new LinearLayout(this);
-                newLine.setLayoutParams(params);
-                newLine.setOrientation(LinearLayout.HORIZONTAL);
-                for(int j=0;j<numberOfButtonsPerRow;j++){
-                    JSONObject single_result = search_results.getJSONObject(k);
-                    k++;
-                    if(single_result.getString("Episode") == ""){
-                        episode_num = single_result.getString("Episode");
-
-                        Button button=new Button(this);
-
-                        button.setLayoutParams(params);
-                        button.setTag(single_result.getString("imdbID"));
-                        disp = "S"+season_num+"E"+episode_num;
-                        button.setText(disp);
-
-//                     button.setOnClickListener(new View.OnClickListener() {
-//                     public void onClick(View view) {
-//
-//                        Intent is = new Intent(getApplicationContext(), someOtherApplication.class);
-//                        is.putExtra("buttonVariable", buttonIdNumber);
-//                        startActivity(is);
-//                    }
-//                });
-
-                        newLine.addView(button);
-                    }
-
-                }
-                verticalLayout.addView(newLine);
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public  void  add_to_list(JSONObject x) {
         try {
@@ -174,6 +91,7 @@ public class seriesEachActivity extends AppCompatActivity {
             String imdbRating = x.getString("imdbRating");
             String imdbRating1= "<b>Rating</b>: " + imdbRating;
             String poster = x.getString("Poster");
+            seasons = x.getString("totalSeasons");
 
             t1 = (TextView)findViewById(R.id.heading);
             t3 = (TextView)findViewById(R.id.rating);
@@ -195,15 +113,15 @@ public class seriesEachActivity extends AppCompatActivity {
             t10.setText(Html.fromHtml(released1));
             Picasso.with(this).load(poster).into(im);
 
-            seasons = x.getString("totalSeasons");
-            int s = Integer.parseInt(seasons);
-            for (int i = 0; i <= s; i++){
-                url = "http://www.omdbapi.com/?i="+imdb+"&Season="+i+"&apikey=584ac277";
-                get_season_details(url);
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    public void all_disp(View v){
+        Intent myIntent = new Intent(seriesEachActivity.this, disp_seasons.class);
+        myIntent.putExtra("seasons", seasons);
+        myIntent.putExtra("imdb1", imdb);
+        seriesEachActivity.this.startActivity(myIntent);
     }
 
 }

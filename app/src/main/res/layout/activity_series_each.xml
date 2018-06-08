@@ -7,27 +7,27 @@
     android:label="Entertainment Search"
     tools:context=".seriesEachActivity">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical|center_horizontal"
-        android:id="@+id/ly">
+        android:id="@+id/main_img"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:layout_gravity="center_vertical|left"
+        android:gravity="center_vertical|left"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/main_img"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/heading"
-            android:text="Sample Text"
-            android:textStyle="bold"
-            android:textSize="30dp"
-            android:gravity="right" />
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heading"
+        android:text="Sample Text"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:paddingTop="10dp"
+        android:layout_toRightOf="@id/main_img"
+        android:gravity="center_vertical|right"
+        android:layout_gravity="center_vertical|right"
+        android:paddingLeft="20dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -36,9 +36,10 @@
         android:textStyle="italic|bold"
         android:textSize="20dp"
         android:paddingLeft="10dp"
+        android:paddingTop="20dp"
         android:paddingRight="10dp"
         android:id="@+id/rating"
-        android:layout_below="@+id/ly"/>
+        android:layout_below="@+id/main_img"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,16 +103,13 @@
         android:text="Sample Content"
         android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linear"
-            android:orientation="vertical">
-        </LinearLayout>
-    </ScrollView>
+   <Button
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="View all Seasons and its Episodes"
+       android:layout_below="@+id/content"
+       android:padding="15dp"
+       android:onClick="all_disp"
+       android:id="@+id/all_disp"/>
 
 </RelativeLayout>
