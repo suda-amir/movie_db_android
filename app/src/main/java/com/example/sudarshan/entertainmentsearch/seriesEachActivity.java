@@ -54,7 +54,6 @@ public class seriesEachActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("Rest response", response.toString());
                         add_to_list(response);
 
                     }
@@ -63,7 +62,6 @@ public class seriesEachActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("Error", "Error");
-                        //t2.setText(error.toString());
                     }
                 }
         );
@@ -111,7 +109,7 @@ public class seriesEachActivity extends AppCompatActivity {
             t7.setText(Html.fromHtml(genre1));
             t9.setText(plot);
             t10.setText(Html.fromHtml(released1));
-            Picasso.with(this).load(poster).into(im);
+            Picasso.get().load(poster).into(im);
 
         } catch (JSONException e) {
             e.printStackTrace();

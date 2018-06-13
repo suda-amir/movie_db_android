@@ -112,8 +112,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //creating recyclerview adapter
         ProductAdapter adapter = new ProductAdapter(this, productList);
-//
-//        //setting adapter to recyclerview
+
         recyclerView.setAdapter(adapter);
     }
     public void newpage(View v)

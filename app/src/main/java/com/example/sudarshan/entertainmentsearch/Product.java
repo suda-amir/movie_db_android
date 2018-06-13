@@ -1,9 +1,5 @@
 package com.example.sudarshan.entertainmentsearch;
 
-/**
- * Created by Belal on 10/18/2017.
- */
-
 
 public class Product {
     private String id;

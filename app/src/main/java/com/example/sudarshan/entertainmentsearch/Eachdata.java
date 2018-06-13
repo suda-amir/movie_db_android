@@ -105,7 +105,7 @@ public class Eachdata extends AppCompatActivity {
             t8.setText(Html.fromHtml(runtime1));
             t9.setText(plot);
             t10.setText(Html.fromHtml(released1));
-            Picasso.with(this).load(poster).into(im);
+            Picasso.get().load(poster).into(im);
 
 
 
